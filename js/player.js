@@ -2,6 +2,8 @@ class Player extends Component {
   constructor(gameScreen, left, top, width, height, environmentVelocity = 3) {
     super(gameScreen, left, top, width, height, "./images/Rocko_Wallaby.webp");
 
+    this.element.style.zIndex = 9;
+
     this.directionX = 0;
     this.directionY = 0;
 

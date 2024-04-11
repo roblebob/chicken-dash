@@ -2,7 +2,7 @@ class Game {
   constructor(width, height) {
     this.gameScreen = document.querySelector("#game-screen");
 
-    this.width = width;
+    this.width = this.gameScreen.offsetWidth;
     this.height = height;
 
     this.gameOver = false;
@@ -11,8 +11,17 @@ class Game {
     this.gameLoopFrecuency = Math.round(1000 / 60);
 
     this.player = null;
-
     this.obstacles = [];
+
+    this.isPaused = false;
+  }
+
+  _width() {
+    return this.gameScreen.offsetWidth;
+  }
+
+  _height() {
+    return this.gameScreen.offsetHeight;
   }
 
   start() {
@@ -24,6 +33,7 @@ class Game {
 
     const envVel = 3;
     this.player = new Player(this.gameScreen, 0, 0, 100, 150, envVel);
+
     this.obstacles.push(
       new Obstacle(this.gameScreen, 0, 530 - 20, 500, 20, envVel)
     );
@@ -38,8 +48,24 @@ class Game {
   }
 
   update() {
+    if (this.isPaused) return;
+
     this.player.move();
     this.obstacles.forEach((obstacle) => obstacle.move());
+
+    // generate new obstacles randomly
+    if (
+      this.obstacles[this.obstacles.length - 1].left <
+        this._width() / Math.random() &&
+      this.obstacles.length < 5
+    ) {
+      this.generateObstacle();
+    }
+
+    // removing obstacles that are out of the screen
+    this.obstacles = this.obstacles.filter(
+      (obstacle) => obstacle.left + obstacle.width > 0
+    );
 
     if (this.player.didCollide(this.obstacles)) {
       console.log("collided");
@@ -60,6 +86,25 @@ class Game {
   }
 
   info() {
-    console.log("gameLoopId", this.gameIntervalId);
+    console.log("obstacles", this.obstacles);
+  }
+
+  generateObstacle() {
+    const minHeigth = 20;
+    const minWidth = 100;  
+
+    console.log("Length", this.obstacles.length);
+
+    const width = Math.floor(Math.random() * 100) + minWidth;
+    const height = Math.floor(Math.random() * 50) + minHeigth;
+    const left = this._width();
+
+    const top = Math.floor(Math.max(Math.random(), 0.4) * this._height());
+
+    console.log(this._height(), top);
+
+    this.obstacles.push(
+      new Obstacle(this.gameScreen, left, top, width, height)
+    );
   }
 }

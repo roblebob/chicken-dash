@@ -24,6 +24,10 @@ window.onload = function () {
       game.player.info();
       game.info();
     }
+
+    if (event.key === "p") {
+      game.isPaused = !game.isPaused;
+    }
   };
 
   document.onkeyup = (event) => {
