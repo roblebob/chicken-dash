@@ -90,15 +90,10 @@ class Game {
     const minHeigth = 20;
     const minWidth = 100;
 
-    console.log("Length", this.obstacles.length);
-
-    const width = Math.floor(Math.random() * 100) + minWidth;
-    const height = Math.floor(Math.random() * 50) + minHeigth;
+    const width = Math.floor(Math.random() * minWidth) + minWidth;
+    const height = Math.floor(Math.random() * minHeigth) + minHeigth;
     const left = this._width();
-
     const top = Math.floor(Math.max(Math.random(), 0.4) * this._height());
-
-    console.log(this._height(), top);
 
     this.obstacles.push(
       new Obstacle(this.gameScreen, left, top, width, height)
