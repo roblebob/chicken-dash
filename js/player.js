@@ -1,14 +1,21 @@
-class Player extends Component {
+class Player {
   constructor(gameScreen, left, top, width, height, environmentVelocity = 3) {
-    super(
-      gameScreen,
-      left,
-      top,
-      width,
-      height,
-      "./images/chicken-right/chicken-run-0.png"
-    );
+    this.gameScreen = gameScreen;
+    this.left = left;
+    this.top = top;
+    this.width = 65;
+    this.height = 92;
 
+    
+
+    this.element = document.createElement("img");
+    this.element.src = "images/chicken-right/chicken-run-0.png";
+    this.element.style.position = "absolute";
+    this.element.style.width = `auto`;
+    this.element.style.height = `auto`;
+    this.element.style.top = `${top}px`;
+    this.element.style.left = `${left}px`;
+    this.gameScreen.appendChild(this.element);
     this.element.style.zIndex = 9;
 
     this.directionX = 0;
@@ -65,5 +72,10 @@ class Player extends Component {
 
   clamp(value, min, max) {
     return Math.max(min, Math.min(value, max));
+  }
+
+  updatePosition() {
+    this.element.style.left = `${this.left}px`;
+    this.element.style.top = `${this.top}px`;
   }
 }
