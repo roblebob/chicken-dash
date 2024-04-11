@@ -1,5 +1,5 @@
 window.onload = function () {
-  let game = new Game(500, 500);
+  let game = new Game();
 
   document
     .getElementById("btn-start")

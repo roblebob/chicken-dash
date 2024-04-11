@@ -1,9 +1,6 @@
 class Game {
-  constructor(width, height) {
+  constructor() {
     this.gameScreen = document.querySelector("#game-screen");
-
-    this.width = this.gameScreen.offsetWidth;
-    this.height = height;
 
     this.gameOver = false;
 
@@ -26,8 +23,8 @@ class Game {
 
   start() {
     console.log("start");
-    this.gameScreen.style.height = `${this.height}px`;
-    this.gameScreen.style.width = `100%`;
+    // this.gameScreen.style.height = `${this.height}px`;
+    // this.gameScreen.style.width = `100%`;
     document.querySelector("#game-start").style.display = "none";
     this.gameScreen.style.display = "flex";
 
@@ -91,7 +88,7 @@ class Game {
 
   generateObstacle() {
     const minHeigth = 20;
-    const minWidth = 100;  
+    const minWidth = 100;
 
     console.log("Length", this.obstacles.length);
 

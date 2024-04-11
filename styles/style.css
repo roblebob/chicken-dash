@@ -7,16 +7,21 @@ body {
     padding: 20px 0px;
 }
 
-#game-container {
+/* #game-container {
     display: flex;
     width: 100vw;
     height: 100vh; 
     padding: 20px 0px;
     justify-content: center;
     background-color: darkgray;
-}
+} */
 
 #game-screen {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+
     display: none;
     background-color: aqua;
 }
