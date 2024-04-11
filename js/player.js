@@ -1,6 +1,13 @@
 class Player extends Component {
   constructor(gameScreen, left, top, width, height, environmentVelocity = 3) {
-    super(gameScreen, left, top, width, height, "./images/Rocko_Wallaby.webp");
+    super(
+      gameScreen,
+      left,
+      top,
+      width,
+      height,
+      "./images/chicken-right/chicken-run-0.png"
+    );
 
     this.element.style.zIndex = 9;
 
