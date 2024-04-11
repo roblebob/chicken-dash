@@ -29,7 +29,7 @@ class Game {
     this.gameScreen.style.display = "flex";
 
     const envVel = 3;
-    this.player = new Player(this.gameScreen, 0, 0, 100, 150, envVel);
+    this.player = new Player(this.gameScreen, 0, 0, envVel);
 
     this.obstacles.push(
       new Obstacle(this.gameScreen, 0, 530 - 20, 500, 20, envVel)

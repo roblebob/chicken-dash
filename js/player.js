@@ -1,31 +1,43 @@
 class Player {
-  constructor(gameScreen, left, top, width, height, environmentVelocity = 3) {
+  constructor(gameScreen, left, top, environmentVelocity = 3) {
     this.gameScreen = gameScreen;
+
+    // primary attributes
     this.left = left;
     this.top = top;
     this.width = 65;
     this.height = 92;
 
-    
-
-    this.element = document.createElement("img");
-    this.element.src = "images/chicken-right/chicken-run-0.png";
+    // create container for the player character stills
+    this.element = document.createElement("div");
     this.element.style.position = "absolute";
-    this.element.style.width = `auto`;
-    this.element.style.height = `auto`;
+    this.element.style.width = `${this.width}px`;
+    this.element.style.height = `${this.height}px`;
     this.element.style.top = `${top}px`;
     this.element.style.left = `${left}px`;
     this.gameScreen.appendChild(this.element);
-    this.element.style.zIndex = 9;
+    this.element.style.zIndex = 9; 
 
+    // add stills to the player character
+    this.characterStills().forEach((still) => {
+      const image = document.createElement("img");
+      image.src = still;
+      image.style.width = `auto`;
+      image.style.height = `auto`;
+      image.style.zIndex = 9;
+
+      //TODO: ATTEMPT TO POSITION THE IMAGE ON TOP ON EACH OTHER
+      image.style.position = "relative";
+      image.style.top = "0px";
+      image.style.left = "0px";
+
+      this.element.appendChild(image);
+    });
+
+    // secondary attributes for movement
     this.directionX = 0;
     this.directionY = 0;
-
-    this.falling = {
-      active: true,
-      velocity: 10,
-    };
-
+    this.falling = { active: true, velocity: 10 };
     this.jumping = { velocity: 20 };
     this.moving = { velocity: 10 };
     this.environment = { velocity: environmentVelocity };
@@ -62,6 +74,7 @@ class Player {
         return true;
       }
     }
+
     this.falling.active = true;
     return false;
   }
@@ -77,5 +90,20 @@ class Player {
   updatePosition() {
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
+  }
+
+  characterStills() {
+    return [
+      "images/chicken-right/chicken-run-0.png",
+      "images/chicken-right/chicken-run-1.png",
+      "images/chicken-right/chicken-run-2.png",
+      "images/chicken-right/chicken-run-3.png",
+      "images/chicken-right/chicken-run-4.png",
+      "images/chicken-right/chicken-run-5.png",
+      "images/chicken-right/chicken-run-6.png",
+      "images/chicken-right/chicken-run-7.png",
+      "images/chicken-right/chicken-run-8.png",
+      "images/chicken-right/chicken-run-9.png",
+    ];
   }
 }
