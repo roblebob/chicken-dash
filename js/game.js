@@ -96,7 +96,14 @@ class Game {
     const top = Math.floor(Math.max(Math.random(), 0.4) * this._height());
 
     this.obstacles.push(
-      new Obstacle(this.gameScreen, left, top, width, height)
+      new Obstacle(
+        this.gameScreen,
+        left,
+        top,
+        width,
+        height,
+        Math.ceil(Math.random() * 5)
+      )
     );
   }
 }

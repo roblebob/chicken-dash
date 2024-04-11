@@ -44,6 +44,7 @@ class Player extends Component {
         true
       ) {
         this.falling.active = false;
+        this.environment.velocity = obstacle.environment.velocity;
         return true;
       }
     }
