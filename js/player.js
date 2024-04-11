@@ -1,5 +1,5 @@
 class Player extends Component {
-  constructor(gameScreen, left, top, width, height) {
+  constructor(gameScreen, left, top, width, height, environmentVelocity = 3) {
     super(gameScreen, left, top, width, height, "./images/Rocko_Wallaby.webp");
 
     this.directionX = 0;
@@ -12,7 +12,7 @@ class Player extends Component {
 
     this.jumping = { velocity: 20 };
     this.moving = { velocity: 10 };
-    this.environment = { velocity: 3};
+    this.environment = { velocity: environmentVelocity };
   }
 
   move() {
