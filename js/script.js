@@ -11,14 +11,19 @@ window.onload = function () {
   document.onkeydown = (event) => {
     event.preventDefault();
 
-    if (event.key === "ArrowLeft")
+    if (event.key === "ArrowLeft") {
       game.player.directionX = -game.player.moving.velocity;
+      game.player.isForward = false;
+    }
 
-    if (event.key === "ArrowRight")
+    if (event.key === "ArrowRight") {
       game.player.directionX = game.player.moving.velocity;
+      game.player.isForward = true;
+    }
 
-    if (event.key === " ")
+    if (event.key === " ") {
       game.player.directionY = -game.player.jumping.velocity;
+    }
 
     if (event.key === "i") {
       game.player.info();

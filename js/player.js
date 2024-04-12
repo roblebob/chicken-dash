@@ -22,9 +22,9 @@ class Player {
 
     this.animation = {
       updateIndex: 0,
-      updateRate: 6,
-
+      updateRate: 6, // 60 / 6 = 10 frames per second
       imgIndex: 0,
+      max: 10,
     };
 
     // add stills to the player character
@@ -39,6 +39,7 @@ class Player {
       image.style.position = "relative";
       image.style.top = "0px"; //`${-this.height * i}px`;
       image.style.left = "0px";
+      image.style.display = "none";
 
       this.element.appendChild(image);
     });
@@ -50,6 +51,7 @@ class Player {
     this.jumping = { velocity: 20 };
     this.moving = { velocity: 10 };
     this.environment = { velocity: environmentVelocity };
+    this.isForward = true;
   }
 
   move() {
@@ -60,14 +62,14 @@ class Player {
     if (!this.falling.active) this.left -= this.environment.velocity;
 
     this.left = Math.max(0, this.left);
+    this.top = Math.max(0, this.top);
 
     // animation update
     if (this.animation.updateIndex % this.animation.updateRate === 0) {
       const stills = [...this.element.querySelectorAll(".player-still")];
 
-      for (let i = 0; i < stills.length; i++) {
+      for (let i = 0; i < this.animation.max; i++) {
         if (i === this.animation.imgIndex) {
-          console.log(i);
           //image.style.visibilty = "visible";
           stills[i].style.display = "block";
         } else {
@@ -76,9 +78,8 @@ class Player {
         }
       }
 
-      console.log(this.animation.imgIndex, stills);
-
-      this.animation.imgIndex = (this.animation.imgIndex + 1) % stills.length;
+      this.animation.imgIndex =
+        (this.animation.imgIndex + 1) % this.animation.max;
     }
 
     this.animation.updateIndex++;
@@ -126,16 +127,26 @@ class Player {
 
   characterStills() {
     return [
-      "images/chicken-right/chicken-run-0.png",
-      "images/chicken-right/chicken-run-1.png",
-      "images/chicken-right/chicken-run-2.png",
-      "images/chicken-right/chicken-run-3.png",
-      "images/chicken-right/chicken-run-4.png",
-      "images/chicken-right/chicken-run-5.png",
-      "images/chicken-right/chicken-run-6.png",
-      "images/chicken-right/chicken-run-7.png",
-      "images/chicken-right/chicken-run-8.png",
-      "images/chicken-right/chicken-run-9.png",
+      "images/chicken-right/chicken-0.png",
+      "images/chicken-right/chicken-1.png",
+      "images/chicken-right/chicken-2.png",
+      "images/chicken-right/chicken-3.png",
+      "images/chicken-right/chicken-4.png",
+      "images/chicken-right/chicken-5.png",
+      "images/chicken-right/chicken-6.png",
+      "images/chicken-right/chicken-7.png",
+      "images/chicken-right/chicken-8.png",
+      "images/chicken-right/chicken-9.png",
+      "images/chicken-right/chicken-10.png",
+      "images/chicken-right/chicken-11.png",
+      "images/chicken-right/chicken-12.png",
+      "images/chicken-right/chicken-13.png",
+      "images/chicken-right/chicken-14.png",
+      "images/chicken-right/chicken-15.png",
+      "images/chicken-right/chicken-16.png",
+      "images/chicken-right/chicken-17.png",
+      "images/chicken-right/chicken-18.png",
+      "images/chicken-right/chicken-19.png",
     ];
   }
 }
