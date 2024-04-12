@@ -20,16 +20,24 @@ class Player {
 
     this.gameScreen.appendChild(this.element);
 
-    // add stills to the player character
+    this.animation = {
+      updateIndex: 0,
+      updateRate: 6,
 
+      imgIndex: 0,
+    };
+
+    // add stills to the player character
     this.characterStills().forEach((still, i) => {
       const image = document.createElement("img");
       image.src = still;
+      image.classList.add(`player-still`);
+      image.id = `player-still-${i}`;
       image.style.width = `auto`;
       image.style.height = `auto`;
       image.style.zIndex = 9;
       image.style.position = "relative";
-      image.style.top = `${-this.height * i}px`;
+      image.style.top = "0px"; //`${-this.height * i}px`;
       image.style.left = "0px";
 
       this.element.appendChild(image);
@@ -52,6 +60,28 @@ class Player {
     if (!this.falling.active) this.left -= this.environment.velocity;
 
     this.left = Math.max(0, this.left);
+
+    // animation update
+    if (this.animation.updateIndex % this.animation.updateRate === 0) {
+      const stills = [...this.element.querySelectorAll(".player-still")];
+
+      for (let i = 0; i < stills.length; i++) {
+        if (i === this.animation.imgIndex) {
+          console.log(i);
+          //image.style.visibilty = "visible";
+          stills[i].style.display = "block";
+        } else {
+          //image.style.visibilty = "collapse";
+          stills[i].style.display = "none";
+        }
+      }
+
+      console.log(this.animation.imgIndex, stills);
+
+      this.animation.imgIndex = (this.animation.imgIndex + 1) % stills.length;
+    }
+
+    this.animation.updateIndex++;
 
     this.updatePosition();
   }
@@ -81,7 +111,8 @@ class Player {
   }
 
   info() {
-    console.log("falling-active:", this.falling.active);
+    console.log("animation", "updateIndex", this.animation.updateIndex);
+    console.log("animation", "imgIndex", this.animation.imgIndex);
   }
 
   clamp(value, min, max) {
