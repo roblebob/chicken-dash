@@ -6,7 +6,7 @@ class Player {
     this.left = left;
     this.top = top;
     this.width = 65;
-    this.height = 92;
+    this.height = 100;
 
     // create container for the player character stills
     this.element = document.createElement("div");
@@ -15,20 +15,21 @@ class Player {
     this.element.style.height = `${this.height}px`;
     this.element.style.top = `${top}px`;
     this.element.style.left = `${left}px`;
+    // this.element.style.zIndex = 9;
+    this.element.display = "block";
+
     this.gameScreen.appendChild(this.element);
-    this.element.style.zIndex = 9; 
 
     // add stills to the player character
-    this.characterStills().forEach((still) => {
+
+    this.characterStills().forEach((still, i) => {
       const image = document.createElement("img");
       image.src = still;
       image.style.width = `auto`;
       image.style.height = `auto`;
       image.style.zIndex = 9;
-
-      //TODO: ATTEMPT TO POSITION THE IMAGE ON TOP ON EACH OTHER
       image.style.position = "relative";
-      image.style.top = "0px";
+      image.style.top = `${-this.height * i}px`;
       image.style.left = "0px";
 
       this.element.appendChild(image);
