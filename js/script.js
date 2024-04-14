@@ -14,11 +14,13 @@ window.onload = function () {
     if (event.key === "ArrowLeft") {
       game.player.directionX = -game.player.moving.velocity;
       game.player.isForward = false;
+      game.player.moving.active = true;
     }
 
     if (event.key === "ArrowRight") {
       game.player.directionX = game.player.moving.velocity;
       game.player.isForward = true;
+      game.player.moving.active = true;
     }
 
     if (event.key === " ") {
@@ -36,8 +38,10 @@ window.onload = function () {
   };
 
   document.onkeyup = (event) => {
-    if (event.key === "ArrowLeft" || event.key === "ArrowRight")
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
       game.player.directionX = 0;
+      game.player.moving.active = false;
+    }
 
     if (event.key === " ") {
       game.player.directionY = 0;

@@ -49,10 +49,12 @@ class Player {
     this.directionY = 0;
     this.falling = { active: true, velocity: 10 };
     this.jumping = { velocity: 20 };
-    this.moving = { velocity: 10 };
+    this.moving = { active: false, velocity: 10 };
     this.environment = { velocity: environmentVelocity };
     this.isForward = true;
   }
+
+  is;
 
   move() {
     this.left += this.directionX;
@@ -65,7 +67,10 @@ class Player {
     this.top = Math.max(0, this.top);
 
     // animation update
-    if (this.animation.updateIndex % this.animation.updateRate === 0) {
+    if (
+      this.animation.updateIndex % this.animation.updateRate === 0 &&
+      this.moving.active
+    ) {
       const stills = [...this.element.querySelectorAll(".player-still")];
 
       for (let i = 0; i < this.animation.max; i++) {
