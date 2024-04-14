@@ -26,8 +26,6 @@ class Game {
   }
 
   start() {
-    console.log("start");
-
     document.querySelector("#game-start").style.display = "none";
     this.gameScreen.style.display = "flex";
 
@@ -35,10 +33,14 @@ class Game {
     this.player = new Player(this.gameScreen, 0, 0, envVel);
 
     this.obstacles.push(
-      new Obstacle(this.gameScreen, 0, 530 - 20, 500, 20, envVel)
-    );
-    this.obstacles.push(
-      new Obstacle(this.gameScreen, 300, 300 - 20, 500, 20, envVel)
+      new Obstacle(
+        this.gameScreen,
+        0,
+        this._height() * 0.9,
+        this._width() * 0.8,
+        this._height() * 0.1,
+        envVel
+      )
     );
 
     this.gameIntervalId = setInterval(
@@ -53,7 +55,7 @@ class Game {
     this.player.move();
     this.obstacles.forEach((obstacle) => obstacle.move());
 
-    // check if player is out of the screen and upadte lifes or game over
+    // check if player is out of the screen and update lifes or game over
     if (this.player.top > this._height()) {
       this.lifes--;
       if (this.lifes === 0) {
@@ -71,7 +73,7 @@ class Game {
     if (
       this.obstacles[this.obstacles.length - 1].left <
         this._width() / Math.random() &&
-      this.obstacles.length < 5
+      this.obstacles.length < 3
     ) {
       this.generateObstacle();
     }
@@ -81,6 +83,7 @@ class Game {
       (obstacle) => obstacle.left + obstacle.width > 0
     );
 
+    // check if player collided with any obstacle
     if (this.player.didCollide(this.obstacles)) {
       console.log("collided");
     }
