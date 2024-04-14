@@ -40,7 +40,7 @@ body {
 
 @keyframes slide {
     0% {
-        background-position: -1689px 0;
+        background-position: calc(-93vw) 0;
     }
 
     /* 95% {
@@ -48,7 +48,7 @@ body {
     } */
 
     100% {
-        background-position: 100vw 0;
+        background-position: 50vw 0;
     }
 }
 
