@@ -48,13 +48,11 @@ class Player {
     this.directionX = 0;
     this.directionY = 0;
     this.falling = { active: true, velocity: 10 };
-    this.jumping = { velocity: 20 };
+    this.flying = { velocity: 20 };
     this.moving = { active: false, velocity: 10 };
     this.environment = { velocity: environmentVelocity };
     this.isForward = true;
   }
-
-  is;
 
   move() {
     this.left += this.directionX;

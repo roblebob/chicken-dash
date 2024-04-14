@@ -24,7 +24,7 @@ window.onload = function () {
     }
 
     if (event.key === " ") {
-      game.player.directionY = -game.player.jumping.velocity;
+      game.player.directionY = -game.player.flying.velocity;
     }
 
     if (event.key === "i") {
