@@ -11,23 +11,12 @@ body {
     width: 100vw;
 }
 
+ 
 #game-screen {
-    /* display: flex; */
     width: 100vw;
     height: 100vh;
     justify-content: center;
 
-    display: none;
-    background-color: aqua;
-}
-
-
-
-
-
-
-
-#game-screen {
     display: none;
     align-content: center;
     padding: 20px 0px;
@@ -51,27 +40,6 @@ body {
         background-position: 50vw 0;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #game-end {
