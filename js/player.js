@@ -20,10 +20,14 @@ class Player {
 
     this.gameScreen.appendChild(this.element);
 
+    this.gameLoop = {
+      index: 0,
+    };
+
     this.animation = {
-      updateIndex: 0,
       updateRate: 6, // 60 / 6 = 10 frames per second
       imgIndex: 0,
+      index: 0,
       max: 10,
     };
 
@@ -48,46 +52,47 @@ class Player {
     this.directionX = 0;
     this.directionY = 0;
     this.falling = { active: true, velocity: 10 };
-    this.flying = { velocity: 20 };
+    this.flying = { active: false, velocity: 20 };
     this.moving = { active: false, velocity: 10 };
     this.environment = { velocity: environmentVelocity };
     this.isForward = true;
   }
 
   move() {
+    this.gameLoop.index++;
+
+    // position update
     this.left += this.directionX;
     this.top += this.directionY;
-
     if (this.falling.active) this.top += this.falling.velocity;
     if (!this.falling.active) this.left -= this.environment.velocity;
-
     this.left = Math.max(0, this.left);
     this.top = Math.max(0, this.top);
+    this.updatePosition();
 
     // animation update
     if (
-      this.animation.updateIndex % this.animation.updateRate === 0 &&
-      this.moving.active
+      // TODO
+      this.gameLoop.index % this.animation.updateRate === 0 &&
+      (this.moving.active || this.animation.imgIndex >= this.animation.max)
     ) {
       const stills = [...this.element.querySelectorAll(".player-still")];
 
-      for (let i = 0; i < this.animation.max; i++) {
-        if (i === this.animation.imgIndex) {
-          //image.style.visibilty = "visible";
-          stills[i].style.display = "block";
-        } else {
-          //image.style.visibilty = "collapse";
-          stills[i].style.display = "none";
-        }
+      for (let i = 0; i < stills.length; i++) {
+        // TODO
+        this.animation.imgIndex =
+          this.animation.index +
+          (this.flying.active || this.falling.active ? 10 : 0);
+
+        stills[i].style.display =
+          i === this.animation.imgIndex ? "block" : "none";
       }
 
-      this.animation.imgIndex =
-        (this.animation.imgIndex + 1) % this.animation.max;
+      // TODO
+      this.animation.index =
+        (this.animation.index + (this.moving.active ? 1 : 0)) %
+        this.animation.max;
     }
-
-    this.animation.updateIndex++;
-
-    this.updatePosition();
   }
 
   didCollide(obstacles) {
@@ -105,6 +110,7 @@ class Player {
         true
       ) {
         this.falling.active = false;
+        this.flying.active = false;
         this.environment.velocity = obstacle.environment.velocity;
         return true;
       }
@@ -115,12 +121,12 @@ class Player {
   }
 
   info() {
-    console.log("animation", "updateIndex", this.animation.updateIndex);
+    console.log("falling", this.falling.active);
+    console.log("flying", this.flying.active);
+    console.log("moving", this.moving.active);
+    console.log("animation", "index", this.animation.index);
     console.log("animation", "imgIndex", this.animation.imgIndex);
-  }
-
-  clamp(value, min, max) {
-    return Math.max(min, Math.min(value, max));
+    console.log("gameLoop", "index", this.gameLoop.index);
   }
 
   updatePosition() {

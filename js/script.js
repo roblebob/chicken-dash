@@ -24,6 +24,9 @@ window.onload = function () {
     }
 
     if (event.key === " ") {
+      game.player.flying.active = true;
+      game.player.moving.active = true;
+      game.player.falling.active = false;
       game.player.directionY = -game.player.flying.velocity;
     }
 
@@ -40,12 +43,14 @@ window.onload = function () {
   document.onkeyup = (event) => {
     if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
       game.player.directionX = 0;
-      game.player.moving.active = false;
+      if (!game.player.flying.active) game.player.moving.active = false;
     }
 
     if (event.key === " ") {
       game.player.directionY = 0;
       game.player.falling.active = true;
+      game.player.flying.active = false;
+      game.player.moving.active = false;
     }
   };
 };
