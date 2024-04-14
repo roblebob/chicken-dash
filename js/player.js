@@ -56,6 +56,24 @@ class Player {
     this.moving = { active: false, velocity: 10 };
     this.environment = { velocity: environmentVelocity };
     this.isForward = true;
+
+    this.lifes = 3;
+    this.lifesElements = [];
+
+    this.showLifes();
+  }
+
+  showLifes() {
+    const lifeElement = document.createElement("img");
+    lifeElement.src = "images/life.png";
+    lifeElement.style.width = "50px";
+    lifeElement.style.height = "auto";
+    lifeElement.style.position = "absolute";
+    lifeElement.style.top = "10px";
+    lifeElement.style.left = `${this.lifesElements.length * 50}px`;
+    lifeElement.style.zIndex = 9;
+    lifeElement.style.display = "block";
+    this.gameScreen.appendChild(lifeElement);
   }
 
   move() {
@@ -82,7 +100,8 @@ class Player {
         // TODO
         this.animation.imgIndex =
           this.animation.index +
-          (this.flying.active || this.falling.active ? 10 : 0);
+          (this.flying.active || this.falling.active ? 10 : 0) +
+          (this.isForward ? 0 : 20);
 
         stills[i].style.display =
           i === this.animation.imgIndex ? "block" : "none";
@@ -136,8 +155,8 @@ class Player {
 
   characterStills() {
     const stills = [];
-    for (let i = 0; i < 20; i++) {
-      stills.push(`images/chicken-right/chicken-${i}.png`);
+    for (let i = 0; i < 40; i++) {
+      stills.push(`images/chicken/chicken-${i}.png`);
     }
     return stills;
   }

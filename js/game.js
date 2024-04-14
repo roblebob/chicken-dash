@@ -23,8 +23,7 @@ class Game {
 
   start() {
     console.log("start");
-    // this.gameScreen.style.height = `${this.height}px`;
-    // this.gameScreen.style.width = `100%`;
+ 
     document.querySelector("#game-start").style.display = "none";
     this.gameScreen.style.display = "flex";
 
