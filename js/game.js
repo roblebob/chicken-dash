@@ -17,26 +17,6 @@ class Game {
     this.showLifes();
   }
 
-  showLifes() {
-    const lifeContainer = document.createElement("div");
-    lifeContainer.style.position = "absolute"; 
-    lifeContainer.style.display = "flex";
-    lifeContainer.style.width = "100%";
-    lifeContainer.style.paddingRight = "5%";
-    lifeContainer.style.justifyContent = "flex-end";
-    this.gameScreen.appendChild(lifeContainer);
-
-    for (let i = 0; i < this.lifes; i++) {
-      const lifeElement = document.createElement("img");
-      lifeElement.src = "images/life.png";
-      lifeElement.style.width = "50px";
-      lifeElement.style.height = "auto";
-      lifeElement.style.zIndex = 9;
-      lifeElement.style.display = "block";
-      lifeContainer.appendChild(lifeElement);
-    }
-  }
-
   _width() {
     return this.gameScreen.offsetWidth;
   }
@@ -73,6 +53,20 @@ class Game {
     this.player.move();
     this.obstacles.forEach((obstacle) => obstacle.move());
 
+    // check if player is out of the screen and upadte lifes or game over
+    if (this.player.top > this._height()) {
+      this.lifes--;
+      if (this.lifes === 0) {
+        this.gameOver = true;
+        this.endGame();
+      } else {
+        document.getElementById("life-container").remove();
+        this.showLifes();
+        this.player.top = 0;
+        this.player.left = 0;
+      }
+    }
+
     // generate new obstacles randomly
     if (
       this.obstacles[this.obstacles.length - 1].left <
@@ -101,6 +95,7 @@ class Game {
 
   endGame() {
     this.player.element.remove();
+    this.obstacles.forEach((obstacle) => obstacle.element.remove());
     this.gameScreen.style.display = "none";
     document.querySelector("#game-end").style.display = "flex";
   }
@@ -128,5 +123,26 @@ class Game {
         Math.ceil(Math.random() * 5)
       )
     );
+  }
+
+  showLifes() {
+    const lifeContainer = document.createElement("div");
+    lifeContainer.id = "life-container";
+    lifeContainer.style.position = "absolute";
+    lifeContainer.style.display = "flex";
+    lifeContainer.style.width = "100%";
+    lifeContainer.style.paddingRight = "5%";
+    lifeContainer.style.justifyContent = "flex-end";
+    this.gameScreen.appendChild(lifeContainer);
+
+    for (let i = 0; i < this.lifes; i++) {
+      const lifeElement = document.createElement("img");
+      lifeElement.src = "images/life.png";
+      lifeElement.style.width = "50px";
+      lifeElement.style.height = "auto";
+      lifeElement.style.zIndex = 9;
+      lifeElement.style.display = "block";
+      lifeContainer.appendChild(lifeElement);
+    }
   }
 }
