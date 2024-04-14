@@ -135,27 +135,10 @@ class Player {
   }
 
   characterStills() {
-    return [
-      "images/chicken-right/chicken-0.png",
-      "images/chicken-right/chicken-1.png",
-      "images/chicken-right/chicken-2.png",
-      "images/chicken-right/chicken-3.png",
-      "images/chicken-right/chicken-4.png",
-      "images/chicken-right/chicken-5.png",
-      "images/chicken-right/chicken-6.png",
-      "images/chicken-right/chicken-7.png",
-      "images/chicken-right/chicken-8.png",
-      "images/chicken-right/chicken-9.png",
-      "images/chicken-right/chicken-10.png",
-      "images/chicken-right/chicken-11.png",
-      "images/chicken-right/chicken-12.png",
-      "images/chicken-right/chicken-13.png",
-      "images/chicken-right/chicken-14.png",
-      "images/chicken-right/chicken-15.png",
-      "images/chicken-right/chicken-16.png",
-      "images/chicken-right/chicken-17.png",
-      "images/chicken-right/chicken-18.png",
-      "images/chicken-right/chicken-19.png",
-    ];
+    const stills = [];
+    for (let i = 0; i < 20; i++) {
+      stills.push(`images/chicken-right/chicken-${i}.png`);
+    }
+    return stills;
   }
 }
