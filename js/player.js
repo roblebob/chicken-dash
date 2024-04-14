@@ -57,24 +57,10 @@ class Player {
     this.environment = { velocity: environmentVelocity };
     this.isForward = true;
 
-    this.lifes = 3;
-    this.lifesElements = [];
 
-    this.showLifes();
   }
 
-  showLifes() {
-    const lifeElement = document.createElement("img");
-    lifeElement.src = "images/life.png";
-    lifeElement.style.width = "50px";
-    lifeElement.style.height = "auto";
-    lifeElement.style.position = "absolute";
-    lifeElement.style.top = "10px";
-    lifeElement.style.left = `${this.lifesElements.length * 50}px`;
-    lifeElement.style.zIndex = 9;
-    lifeElement.style.display = "block";
-    this.gameScreen.appendChild(lifeElement);
-  }
+
 
   move() {
     this.gameLoop.index++;

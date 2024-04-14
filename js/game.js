@@ -11,6 +11,30 @@ class Game {
     this.obstacles = [];
 
     this.isPaused = false;
+
+    this.lifes = 3;
+
+    this.showLifes();
+  }
+
+  showLifes() {
+    const lifeContainer = document.createElement("div");
+    lifeContainer.style.position = "absolute"; 
+    lifeContainer.style.display = "flex";
+    lifeContainer.style.width = "100%";
+    lifeContainer.style.paddingRight = "5%";
+    lifeContainer.style.justifyContent = "flex-end";
+    this.gameScreen.appendChild(lifeContainer);
+
+    for (let i = 0; i < this.lifes; i++) {
+      const lifeElement = document.createElement("img");
+      lifeElement.src = "images/life.png";
+      lifeElement.style.width = "50px";
+      lifeElement.style.height = "auto";
+      lifeElement.style.zIndex = 9;
+      lifeElement.style.display = "block";
+      lifeContainer.appendChild(lifeElement);
+    }
   }
 
   _width() {
@@ -23,7 +47,7 @@ class Game {
 
   start() {
     console.log("start");
- 
+
     document.querySelector("#game-start").style.display = "none";
     this.gameScreen.style.display = "flex";
 
