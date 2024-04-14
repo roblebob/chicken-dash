@@ -4,11 +4,15 @@ body {
 }
 
 #game-start {
-    padding: 20px 0px;
+    background-image: url("../images/start.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
 }
 
 #game-screen {
-    display: flex;
+    /* display: flex; */
     width: 100vw;
     height: 100vh;
     justify-content: center;
@@ -17,6 +21,64 @@ body {
     background-color: aqua;
 }
 
+
+
+
+
+
+
+#game-screen {
+    display: none;
+    align-content: center;
+    padding: 20px 0px;
+    overflow: hidden;
+    position: relative;
+    background-image: url(../images/background3.webp);
+    background-size: cover;
+    animation: slide 90s linear infinite;
+}
+
+@keyframes slide {
+    0% { 
+        background-position: 0 0;
+    }
+
+    /* 95% {
+        background-position: 0 0;
+    } */
+
+    100% {
+        background-position: 100vw 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #game-end {
     display: none;
+    background-image: url("../images/end.webp");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
 }
