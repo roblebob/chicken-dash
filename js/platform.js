@@ -1,4 +1,4 @@
-class Obstacle extends Component {
+class Platform extends Component {
   constructor(gameScreen, left, top, width, height, environmentVelocity = 3) {
     super(
       gameScreen,

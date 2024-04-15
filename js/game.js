@@ -8,7 +8,7 @@ class Game {
     this.gameLoopFrecuency = Math.round(1000 / 60);
 
     this.player = null;
-    this.obstacles = [];
+    this.platforms = [];
 
     this.isPaused = false;
 
@@ -57,8 +57,8 @@ class Game {
     const envVel = 3;
     this.player = new Player(this.gameScreen, 0, 0, envVel);
 
-    this.obstacles.push(
-      new Obstacle(
+    this.platforms.push(
+      new Platform(
         this.gameScreen,
         0,
         this._height() * 0.9,
@@ -78,7 +78,7 @@ class Game {
     if (this.isPaused) return;
 
     this.player.move();
-    this.obstacles.forEach((obstacle) => obstacle.move());
+    this.platforms.forEach((platform) => platform.move());
 
     // check if player is out of the screen and update lifes or game over
     if (this.player.top > this._height()) {
@@ -94,22 +94,22 @@ class Game {
       }
     }
 
-    // generate new obstacles randomly
+    // generate new platforms randomly
     if (
-      this.obstacles[this.obstacles.length - 1].left <
+      this.platforms[this.platforms.length - 1].left <
         this._width() / Math.random() &&
-      this.obstacles.length < 3
+      this.platforms.length < 3
     ) {
-      this.generateObstacle();
+      this.generatePlatform();
     }
 
-    // removing obstacles that are out of the screen
-    this.obstacles = this.obstacles.filter(
-      (obstacle) => obstacle.left + obstacle.width > 0
+    // removing platforms that are out of the screen
+    this.platforms = this.platforms.filter(
+      (platform) => platform.left + platform.width > 0
     );
 
-    // check if player collided with any obstacle
-    if (this.player.didCollide(this.obstacles)) {
+    // check if player collided with any platform
+    if (this.player.didCollide(this.platforms)) {
       console.log("collided");
     }
 
@@ -128,16 +128,16 @@ class Game {
 
   endGame() {
     this.player.element.remove();
-    this.obstacles.forEach((obstacle) => obstacle.element.remove());
+    this.platforms.forEach((platform) => platform.element.remove());
     this.gameScreen.style.display = "none";
     document.querySelector("#game-end").style.display = "flex";
   }
 
   info() {
-    console.log("obstacles", this.obstacles);
+    console.log("platforms", this.platforms);
   }
 
-  generateObstacle() {
+  generatePlatform() {
     const minHeigth = 20;
     const minWidth = 100;
 
@@ -146,8 +146,8 @@ class Game {
     const left = this._width();
     const top = Math.floor(Math.max(Math.random(), 0.4) * this._height());
 
-    this.obstacles.push(
-      new Obstacle(
+    this.platforms.push(
+      new Platform(
         this.gameScreen,
         left,
         top,

@@ -114,23 +114,23 @@ class Player {
     }
   }
 
-  didCollide(obstacles) {
+  didCollide(platforms) {
     const playerRect = this.element.getBoundingClientRect();
 
-    for (const obstacle of obstacles) {
-      const obstacleRect = obstacle.element.getBoundingClientRect();
+    for (const platform of platforms) {
+      const platformRect = platform.element.getBoundingClientRect();
 
       if (
-        playerRect.left < obstacleRect.right &&
-        playerRect.right > obstacleRect.left &&
-        // playerRect.top < obstacleRect.bottom &&
-        playerRect.bottom > obstacleRect.top &&
-        playerRect.bottom < obstacleRect.bottom &&
+        playerRect.left < platformRect.right &&
+        playerRect.right > platformRect.left &&
+        // playerRect.top < platformRect.bottom && 
+        playerRect.bottom > platformRect.top &&
+        playerRect.bottom < platformRect.bottom &&
         true
       ) {
         this.falling.active = false;
         this.flying.active = false;
-        this.environment.velocity = obstacle.environment.velocity;
+        this.environment.velocity = platform.environment.velocity;
         return true;
       }
     }
