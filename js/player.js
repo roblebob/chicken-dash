@@ -41,7 +41,7 @@ class Player {
       image.style.height = `auto`;
       image.style.zIndex = 9;
       image.style.position = "relative";
-      image.style.top = "0px"; //`${-this.height * i}px`;
+      image.style.top = "0px";
       image.style.left = "0px";
       image.style.display = "none";
 
@@ -56,23 +56,37 @@ class Player {
     this.moving = { active: false, velocity: 10 };
     this.environment = { velocity: environmentVelocity };
     this.isForward = true;
-
-
+  
+  
+    this.energy = { amount: 100, change: 0 };
+  
   }
-
-
 
   move() {
     this.gameLoop.index++;
 
+    // energy update
+    this.energy.amount = Math.max(0, this.energy.amount + this.energy.change);
+
+
+
+
+
     // position update
     this.left += this.directionX;
     this.top += this.directionY;
+
     if (this.falling.active) this.top += this.falling.velocity;
     if (!this.falling.active) this.left -= this.environment.velocity;
+    
     this.left = Math.max(0, this.left);
     this.top = Math.max(0, this.top);
+    
     this.updatePosition();
+
+
+
+
 
     // animation update
     if (

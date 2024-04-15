@@ -15,6 +15,31 @@ class Game {
     this.lifes = 3;
 
     this.showLifes();
+    this.showEnergy();
+  }
+
+  showEnergy() {
+    const energyContainer = document.createElement("div");
+    energyContainer.id = "energy-container";
+    energyContainer.style.position = "absolute";
+    energyContainer.style.width = "10%";
+    energyContainer.style.height = "2%";
+    energyContainer.style.top = "2%";
+    energyContainer.style.left = "2%";
+    energyContainer.style.zIndex = 8;
+    energyContainer.style.borderRadius = "8px";
+    energyContainer.style.backgroundColor = "transparent";
+    energyContainer.style.border = "1px solid black";
+    this.gameScreen.appendChild(energyContainer);
+
+    const energyBar = document.createElement("div");
+    energyContainer.appendChild(energyBar);
+    energyBar.id = "energy-bar";
+    energyBar.style.position = "absolute";
+    energyBar.style.borderTopLeftRadius = "8px";
+    energyBar.style.borderBottomLeftRadius = "8px";
+    energyBar.style.height = "100%";
+    energyBar.style.backgroundColor = "#6894A6";
   }
 
   _width() {
@@ -87,6 +112,17 @@ class Game {
     if (this.player.didCollide(this.obstacles)) {
       console.log("collided");
     }
+
+    // update energy bar
+    // if (this.energy.change !== 0) {
+    //   this.energy.amount += this.energy.change;
+    //   document.getElementById(
+    //     "energy-bar"
+    //   ).style.width = `${this.energy.amount}%`;
+    // }
+    document.getElementById(
+      "energy-bar"
+    ).style.width = `${this.player.energy.amount}%`;
   }
 
   gameLoop() {

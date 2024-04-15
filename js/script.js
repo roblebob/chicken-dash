@@ -28,6 +28,7 @@ window.onload = function () {
       game.player.moving.active = true;
       game.player.falling.active = false;
       game.player.directionY = -game.player.flying.velocity;
+      game.player.energy.change -= 0.1;
     }
 
     if (event.key === "i") {
@@ -51,6 +52,7 @@ window.onload = function () {
       game.player.falling.active = true;
       game.player.flying.active = false;
       game.player.moving.active = false;
+      game.player.energy.change = 0;
     }
   };
 };
