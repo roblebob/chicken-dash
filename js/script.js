@@ -27,7 +27,7 @@ window.onload = function () {
       game.player.flying.active = true;
       game.player.moving.active = true;
       game.player.falling.active = false;
-      // game.player.directionY = -game.player.flying.velocity;
+      game.player.directionY = -game.player.flying.velocity;
       game.player.energy.change -= 0.1;
     }
 

@@ -69,14 +69,8 @@ class Player {
     // position update
     this.left += this.directionX;
 
-    if (this.energy.amount <= 0) {
-      this.flying.active = false;
-    }
-
-    if (this.flying.active) {
-      this.top -= this.flying.velocity;
-    }
-    // this.top += this.directionY;
+    if (this.energy.amount <= 0) this.flying.active = false;
+    if (this.flying.active) this.top += this.directionY;
 
     if (this.falling.active) this.top += this.falling.velocity;
     if (!this.falling.active) this.left -= this.environment.velocity;
