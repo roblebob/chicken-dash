@@ -91,6 +91,7 @@ class Game {
         this.showLifes();
         this.player.top = 0;
         this.player.left = 0;
+        this.player.energy.amount = 100;
       }
     }
 

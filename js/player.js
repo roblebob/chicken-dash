@@ -56,10 +56,8 @@ class Player {
     this.moving = { active: false, velocity: 10 };
     this.environment = { velocity: environmentVelocity };
     this.isForward = true;
-  
-  
+
     this.energy = { amount: 100, change: 0 };
-  
   }
 
   move() {
@@ -68,25 +66,25 @@ class Player {
     // energy update
     this.energy.amount = Math.max(0, this.energy.amount + this.energy.change);
 
-
-
-
-
     // position update
     this.left += this.directionX;
-    this.top += this.directionY;
+
+    if (this.energy.amount <= 0) {
+      this.flying.active = false;
+    }
+
+    if (this.flying.active) {
+      this.top -= this.flying.velocity;
+    }
+    // this.top += this.directionY;
 
     if (this.falling.active) this.top += this.falling.velocity;
     if (!this.falling.active) this.left -= this.environment.velocity;
-    
+
     this.left = Math.max(0, this.left);
     this.top = Math.max(0, this.top);
-    
+
     this.updatePosition();
-
-
-
-
 
     // animation update
     if (
@@ -123,7 +121,7 @@ class Player {
       if (
         playerRect.left < platformRect.right &&
         playerRect.right > platformRect.left &&
-        // playerRect.top < platformRect.bottom && 
+        // playerRect.top < platformRect.bottom &&
         playerRect.bottom > platformRect.top &&
         playerRect.bottom < platformRect.bottom &&
         true
