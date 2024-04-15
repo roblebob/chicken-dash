@@ -114,12 +114,6 @@ class Game {
     }
 
     // update energy bar
-    // if (this.energy.change !== 0) {
-    //   this.energy.amount += this.energy.change;
-    //   document.getElementById(
-    //     "energy-bar"
-    //   ).style.width = `${this.energy.amount}%`;
-    // }
     document.getElementById(
       "energy-bar"
     ).style.width = `${this.player.energy.amount}%`;
