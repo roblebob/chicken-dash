@@ -2,10 +2,10 @@ window.onload = function () {
   let game = new Game();
 
   document
-    .getElementById("btn-start")
+    .getElementById("game-start")
     .addEventListener("click", () => game.start());
   document
-    .getElementById("btn-restart")
+    .getElementById("game-end")
     .addEventListener("click", () => location.reload());
 
   document.onkeydown = (event) => {

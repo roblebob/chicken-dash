@@ -57,7 +57,7 @@ class Player {
     this.environment = { velocity: environmentVelocity };
     this.isForward = true;
 
-    this.energy = { amount: 100, change: 0 };
+    this.energy = { amount: 100, change: 0, restore: 0.03 };
   }
 
   move() {
@@ -65,6 +65,10 @@ class Player {
 
     // energy update
     this.energy.amount = Math.max(0, this.energy.amount + this.energy.change);
+    this.energy.amount = Math.min(
+      100,
+      this.energy.amount + this.energy.restore
+    );
 
     // position update
     this.left += this.directionX;
