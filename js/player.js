@@ -43,7 +43,7 @@ class Player {
       image.style.position = "relative";
       image.style.top = "0px";
       image.style.left = "0px";
-      image.style.display = "none";
+      image.style.display = i === 0 ? "block" : "none";
 
       this.element.appendChild(image);
     });
@@ -67,7 +67,7 @@ class Player {
     this.energy.amount = Math.max(0, this.energy.amount + this.energy.change);
     this.energy.amount = Math.min(
       100,
-      this.energy.amount + this.energy.restore
+      this.energy.amount + (!this.flying.active ? this.energy.restore : 0)
     );
 
     // position update
@@ -142,6 +142,7 @@ class Player {
     console.log("animation", "index", this.animation.index);
     console.log("animation", "imgIndex", this.animation.imgIndex);
     console.log("gameLoop", "index", this.gameLoop.index);
+    console.log("enegy", this.energy.amount);
   }
 
   updatePosition() {
