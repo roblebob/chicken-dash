@@ -86,14 +86,13 @@ class Player {
 
     // animation update
     if (
-      // TODO
       this.gameLoop.index % this.animation.updateRate === 0 &&
       (this.moving.active || this.animation.imgIndex >= this.animation.max)
     ) {
       const stills = [...this.element.querySelectorAll(".player-still")];
 
       for (let i = 0; i < stills.length; i++) {
-        // TODO
+     
         this.animation.imgIndex =
           this.animation.index +
           (this.flying.active || this.falling.active ? 10 : 0) +
@@ -103,7 +102,6 @@ class Player {
           i === this.animation.imgIndex ? "block" : "none";
       }
 
-      // TODO
       this.animation.index =
         (this.animation.index + (this.moving.active ? 1 : 0)) %
         this.animation.max;
