@@ -1,8 +1,8 @@
-# Chicken Dash - A Jump'n'Run Browser Game
+# Chicken Dash
 
 ## About
 
-Jump and Run is a simple browser game where players control a character that jumps and runs through various levels, avoiding obstacles and collecting items. The game is built using HTML, CSS, and JavaScript.
+Chicken Dash is a simple Jump 'n' Run browser game where players control a character that jumps and runs through various levels, avoiding obstacles and collecting items. The game is built using HTML, CSS, and JavaScript.
 
 https://roblebob.github.io/chicken-dash/
 
